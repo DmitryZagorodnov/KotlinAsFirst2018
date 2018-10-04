@@ -158,7 +158,8 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     sr = (a + b + c - max - min)
      kvmax = (max * max)
      sumkv = (sr * sr + min * min)
-     if (kvmax > sumkv) return(2) else
+     if (kvmax > sumkv) return(2)
+        else
          if (kvmax == sumkv) return(1) else
              return(0)
 }
