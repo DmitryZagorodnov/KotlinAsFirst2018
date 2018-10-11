@@ -166,12 +166,12 @@ fun pow(x: Int, y: Int): Int {
 }
 
 fun pow(x: Int, y: Double): Int {
-        var s = x
-        if (y.toInt() == 1) return (x) else
-            for (i in 2..y.toInt()) {
-                s = (s * x)
-            }
-        return (s)
+    var s = x
+    if (y.toInt() == 1) return (x) else
+        for (i in 2..y.toInt()) {
+            s = (s * x)
+        }
+    return (s)
 }
 
 fun pow(x: Double, y: Int): Double {
@@ -244,7 +244,7 @@ fun sin(x: Double, eps: Double): Double {
         sum = (sum + pow(-1, (st)) * m)
         st = (st + 1)
     }
-    return(sum)
+    return (sum)
 }
 
 /**
@@ -265,7 +265,7 @@ fun cos(x: Double, eps: Double): Double {
         st = (st + 1)
         s = (s + 2)
     }
-    return(sum)
+    return (sum)
 }
 
 /**
