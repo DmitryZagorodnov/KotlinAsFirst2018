@@ -73,7 +73,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var s = 0
-    var m = n
+    var m: Int
     do {
         s = (s + 1)
         m = (n % 10)
@@ -88,7 +88,7 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var s = 1
+    var s: Int
     var a = 1
     var b = 1
     if ((n == 1) || (n == 2)) return (1) else
@@ -149,6 +149,7 @@ fun isCoPrime(m: Int, n: Int): Boolean = (nod(m, n) == 1)
 
 fun pow(x: Double, y: Double): Double {
     var s = x
+    if (y == 0.0) return 1.0 else
     if (y == 1.0) return (x) else
         for (i in 2..y.toInt()) {
             s = (s * x)
@@ -158,6 +159,7 @@ fun pow(x: Double, y: Double): Double {
 
 fun pow(x: Int, y: Int): Int {
     var s = x
+    if (y == 0) return 1 else
     if (y == 1) return (x) else
         for (i in 2..y) {
             s = (s * x)
@@ -167,6 +169,7 @@ fun pow(x: Int, y: Int): Int {
 
 fun pow(x: Int, y: Double): Int {
     var s = x
+    if (y == 0.0) return 1 else
     if (y.toInt() == 1) return (x) else
         for (i in 2..y.toInt()) {
             s = (s * x)
@@ -176,6 +179,7 @@ fun pow(x: Int, y: Double): Int {
 
 fun pow(x: Double, y: Int): Double {
     var s = x
+    if (y == 0) return 1.0 else
     if (y == 1) return (x) else
         for (i in 2..y) {
             s = (s * x)
@@ -280,6 +284,7 @@ fun revert(n: Int): Int {
     var c = 0
     var rev = 0
     var st = 1
+    if (kc(s) == 1) return(s) else
     while (s != 0) {
         c = (c + 1)
         s = (s % 10)
@@ -287,6 +292,7 @@ fun revert(n: Int): Int {
     for (i in 1..c) {
         st = (st * 10)
     }
+
     s = n
     for (i in 1..c) {
         rev += ((s % 10) * st)

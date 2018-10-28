@@ -3,6 +3,10 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
+import lesson3.task1.isPrime
+import lesson3.task1.kc
+import lesson3.task1.pow
 import kotlin.math.sqrt
 
 /**
@@ -115,14 +119,23 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = TODO()
+fun abs(v: List<Double>): Double {
+    var s = 0.0
+    for (element in v) {
+        s = (s + sqr(element))
+    }
+    return(sqrt(s))
+}
 
 /**
  * Простая
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = TODO()
+fun mean(list: List<Double>): Double {
+    if (list.size == 0) return (0.0) else
+        return((list.sum() / list.size).toDouble())
+}
 
 /**
  * Средняя
@@ -132,7 +145,13 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+    var sr = mean(list)
+    for (i in 0..(list.size - 1)) {
+        list[i] = (list[i] - sr)
+    }
+    return(list)
+}
 
 /**
  * Средняя
@@ -141,7 +160,13 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.0.
  */
-fun times(a: List<Double>, b: List<Double>): Double = TODO()
+fun times(a: List<Double>, b: List<Double>): Double {
+    var c = 0.0
+    for (i in 0..(a.size - 1)) {
+     c = (c + a[i] * b[i])
+    }
+    return(c)
+}
 
 /**
  * Средняя
@@ -151,7 +176,17 @@ fun times(a: List<Double>, b: List<Double>): Double = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0.0 при любом x.
  */
-fun polynom(p: List<Double>, x: Double): Double = TODO()
+fun polynom(p: List<Double>, x: Double): Double {
+        var px = 0.0
+        var pr = 1.0
+         if (p.isEmpty()) return(0.0) else
+             for (i in 0..(p.size - 1)) {
+                px = (px + p[i] * pr)
+                 pr = (pr * x)
+                 }
+        return(px)
+    }
+
 
 /**
  * Средняя
@@ -163,7 +198,16 @@ fun polynom(p: List<Double>, x: Double): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()
+fun accumulate(list: MutableList<Double>): MutableList<Double> {
+    var sum = 0.0
+    var l: Double
+    for (i in 0..(list.size - 1)) {
+       l = list[i]
+        list[i] = (list[i] + sum)
+        sum = (sum + l)
+    }
+    return(list)
+}
 
 /**
  * Средняя
@@ -190,7 +234,21 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var i = 0
+    var m = n
+    val list = mutableListOf<Int>()
+    while (n > pow(base,i)) {
+        i = (i + 1)
+    }
+    if (m < base) list.add(m) else
+    while (i > 0) {
+        i = (i - 1)
+        list.add(m / pow(base, i))
+        m = (m % pow(base, i))
+    }
+    return(list)
+}
 
 /**
  * Сложная
@@ -209,7 +267,15 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var sum = 0
+    var n = (digits.size - 1)
+    for (i in 0..(digits.size - 1)) {
+        sum = (sum + digits[i] * pow(base, n))
+        n = (n - 1)
+    }
+    return(sum)
+}
 
 /**
  * Сложная
