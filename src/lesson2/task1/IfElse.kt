@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson2.task1
 
 import lesson1.task1.discriminant
@@ -63,37 +64,34 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String { if (10<=(age % 100) && (age % 100)<=20) return("$age лет")
-else    return when (age % 10) {
+fun ageDescription(age: Int): String {
+    if (10 <= (age % 100) && (age % 100) <= 20) return ("$age лет")
+    else return when (age % 10) {
         1 -> "$age год"
-        2, 3 , 4 -> "$age года"
+        2, 3, 4 -> "$age года"
         5, 6, 7, 8, 9, 0 -> "$age лет"
         else -> "$age не может быть"
     }
-
-
-
-
-
-    /**
-     * Простая
-     *
-     * Путник двигался t1 часов со скоростью v1 км/час, затем t2 часов — со скоростью v2 км/час
-     * и t3 часов — со скоростью v3 км/час.
-     * Определить, за какое время он одолел первую половину пути?
-     */
-
 }
+
+
+/**
+ * Простая
+ *
+ * Путник двигался t1 часов со скоростью v1 км/час, затем t2 часов — со скоростью v2 км/час
+ * и t3 часов — со скоростью v3 км/час.
+ * Определить, за какое время он одолел первую половину пути?
+ */
 
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
                    t3: Double, v3: Double): Double {
-    var s = (t1 * v1 + t2 * v2 + t3 * v3) / 2.0
-    var s1 = t1 * v1
-    var s2 = t2 * v2
-    if (s <= s1) return( s/v1) else
-                      if (s <= s1 + s2 ) return(t1 + (s-s1)/v2) else
-                                                   return(t1 + t2 + (s - s1 - s2)/v3)
+    val s = (t1 * v1 + t2 * v2 + t3 * v3) / 2.0
+    val s1 = t1 * v1
+    val s2 = t2 * v2
+    if (s <= s1) return (s / v1)
+    else if (s <= s1 + s2) return (t1 + (s - s1) / v2)
+    else return (t1 + t2 + (s - s1 - s2) / v3)
 }
 
 /**
@@ -109,13 +107,9 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
                        rookX2: Int, rookY2: Int): Int {
     var sum = 0
-    if (kingX == rookX1 || kingY == rookY1) sum = (sum + 1) else sum + 0
-    if (kingX == rookX2 || kingY == rookY2) sum = (sum + 2) else sum + 0
-    return(sum)
-
-
-
-
+    if (kingX == rookX1 || kingY == rookY1) sum = (sum + 1)
+    if (kingX == rookX2 || kingY == rookY2) sum = (sum + 2)
+    return (sum)
 }
 
 /**
@@ -132,10 +126,13 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
                           bishopX: Int, bishopY: Int): Int {
     var sum = 0
-    if (kingX == rookX || kingY == rookY) sum = (sum + 1) else sum + 0
-    if (abs(kingX - bishopX) == abs(kingY - bishopY)) sum = (sum  + 2) else sum + 0
-    return(sum)
+    when {
+        kingX == rookX || kingY == rookY -> sum = (sum + 1)
+        abs(kingX - bishopX) == abs(kingY - bishopY) -> sum = (sum + 2)
+    }
+    return (sum)
 }
+
 /**
  * Простая
  *
@@ -145,24 +142,24 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
- var max: Double
- var min: Double
- var sr: Double
-  var kvmax: Double
-  var sumkv: Double
-   if ((a > (b + c)) || (b > (a + c)) || (c > (b + a))) return(-1) else
-    if (a > b) max = a else max = b
-    if (c > max) max = c else max = max + 0
-    if (a < b) min = a else min = b
-    if (c < min) min = c else min = min + 0
+    val max: Double
+    val min: Double
+    val sr: Double
+    val kvmax: Double
+    val sumkv: Double
+    if ((a > (b + c)) || (b > (a + c)) || (c > (b + a))) return (-1)
+    else max = maxOf(a, b, c)
+    min = minOf(a, b, c)
     sr = (a + b + c - max - min)
-     kvmax = (max * max)
-     sumkv = (sr * sr + min * min)
-     if (kvmax > sumkv) return(2)
-        else
-         if (kvmax == sumkv) return(1) else
-             return(0)
+    kvmax = (max * max)
+    sumkv = (sr * sr + min * min)
+    when {
+        kvmax > sumkv -> return (2)
+        kvmax == sumkv -> return (1)
+        else -> return (0)
+    }
 }
+
 /**
  * Средняя
  *
@@ -172,17 +169,14 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-         return  when {
-            ((b < c) || (d < a)) -> (-1)
-            (a == b) || (d == c) || (d == a) || (b == c) -> (0)
-             (a <= c) && (b >= d) -> (d - c)
-             (a <= c) && (b <= d) -> (b - c)
-             (a > c) && (d > b) -> (b - a)
-             (a < c) && (c < b) && (b < d) -> (b - c)
-             (a > c) && (d < b) && (d > a) -> (d - a)
-             else -> (-1)
-        }
-
-
-
+    return when {
+        ((b < c) || (d < a)) -> (-1)
+        (a == b) || (d == c) || (d == a) || (b == c) -> (0)
+        (a <= c) && (b >= d) -> (d - c)
+        (a <= c) && (b <= d) -> (b - c)
+        (a > c) && (d > b) -> (b - a)
+        (a < c) && (c < b) && (b < d) -> (b - c)
+        (a > c) && (d < b) && (d > a) -> (d - a)
+        else -> (-1)
+    }
 }

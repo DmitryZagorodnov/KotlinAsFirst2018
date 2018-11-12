@@ -125,7 +125,7 @@ fun nod(m: Int, n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     var s = 2
-    while ((n % s) !== 0) {
+    while ((n % s) != 0) {
         s = (s + 1)
     }
     return (s)
@@ -150,40 +150,40 @@ fun isCoPrime(m: Int, n: Int): Boolean = (nod(m, n) == 1)
 fun pow(x: Double, y: Double): Double {
     var s = x
     if (y == 0.0) return 1.0 else
-    if (y == 1.0) return (x) else
-        for (i in 2..y.toInt()) {
-            s = (s * x)
-        }
+        if (y == 1.0) return (x) else
+            for (i in 2..y.toInt()) {
+                s = (s * x)
+            }
     return (s)
 }
 
 fun pow(x: Int, y: Int): Int {
     var s = x
     if (y == 0) return 1 else
-    if (y == 1) return (x) else
-        for (i in 2..y) {
-            s = (s * x)
-        }
+        if (y == 1) return (x) else
+            for (i in 2..y) {
+                s = (s * x)
+            }
     return (s)
 }
 
 fun pow(x: Int, y: Double): Int {
     var s = x
     if (y == 0.0) return 1 else
-    if (y.toInt() == 1) return (x) else
-        for (i in 2..y.toInt()) {
-            s = (s * x)
-        }
+        if (y.toInt() == 1) return (x) else
+            for (i in 2..y.toInt()) {
+                s = (s * x)
+            }
     return (s)
 }
 
 fun pow(x: Double, y: Int): Double {
     var s = x
     if (y == 0) return 1.0 else
-    if (y == 1) return (x) else
-        for (i in 2..y) {
-            s = (s * x)
-        }
+        if (y == 1) return (x) else
+            for (i in 2..y) {
+                s = (s * x)
+            }
     return (s)
 }
 
@@ -284,8 +284,8 @@ fun revert(n: Int): Int {
     var c = 0
     var rev = 0
     var st = 1
-    if (kc(s) == 1) return(s) else
-    while (s != 0) {
+    if (kc(s) == 1) return (s)
+    else while (s != 0) {
         c = (c + 1)
         s = (s % 10)
     }
@@ -346,7 +346,7 @@ fun squareSequenceDigit(n: Int): Int {
     var kv: Int
     var cifr = 0
     var i = 0
-    var nc: Int
+    val nc: Int
     while (cifr < n) {
         i = (i + 1)
         kv = sqr(i)
@@ -374,7 +374,7 @@ fun fibSequenceDigit(n: Int): Int {
     var fb: Int
     var cifr = 0
     var i = 0
-    var nc: Int
+    val nc: Int
     while (cifr < n) {
         i = (i + 1)
         fb = fib(i)
