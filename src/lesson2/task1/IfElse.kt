@@ -67,7 +67,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String =
     if (10 <= (age % 100) && (age % 100) <= 20) ("$age лет")
-    else  when (age % 10) {
+    else when (age % 10) {
         1 -> "$age год"
         2, 3, 4 -> "$age года"
         5, 6, 7, 8, 9, 0 -> "$age лет"
@@ -92,8 +92,8 @@ fun timeForHalfWay(t1: Double, v1: Double,
     val s2 = t2 * v2
     return when {
         s <= s1 -> s / v1
-        s <= s1 + s2 -> t1 + (s- s1) / v2
-        else  -> t1 + t2 + (s - s1 - s2) / v3
+        s <= s1 + s2 -> t1 + (s - s1) / v2
+        else -> t1 + t2 + (s - s1 - s2) / v3
     }
 }
 
@@ -145,13 +145,11 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val max: Double
-    val min: Double
+    val max = maxOf(a, b, c)
+    val min = minOf(a, b, c)
     val sr: Double
     val kvmax: Double
     val sumkv: Double
-    max = maxOf(a, b, c)
-    min = minOf(a, b, c)
     sr = a + b + c - max - min
     kvmax = sqr(max)
     sumkv = sqr(sr) + sqr(min)
