@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import java.lang.Math.pow
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.max
@@ -139,7 +140,7 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  */
 fun isCoPrime(m: Int, n: Int): Boolean = (nod(m, n) == 1)
 
-fun pow(x: Double, y: Double): Double {
+/*fun pow(x: Double, y: Double): Double {
     var s = x
     if (y == 0.0) return 1.0 else
         if (y == 1.0) return (x) else
@@ -149,7 +150,7 @@ fun pow(x: Double, y: Double): Double {
     return (s)
 }
 
-fun pow(x: Int, y: Int): Int {
+*//*fun pow(x: Int, y: Int): Int {
     var s = x
     if (y == 0) return 1 else
         if (y == 1) return (x) else
@@ -157,7 +158,7 @@ fun pow(x: Int, y: Int): Int {
                 s = (s * x)
             }
     return (s)
-}
+}*//*
 
 fun pow(x: Int, y: Double): Int {
     var s = x
@@ -177,7 +178,7 @@ fun pow(x: Double, y: Int): Double {
                 s = (s * x)
             }
     return (s)
-}
+}*/
 
 
 /**
@@ -192,8 +193,7 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
     while (k < sqrt(m.toDouble())) {
         k++
     }
-    if (k <= sqrt(n.toDouble())) return true
-    else return false
+    return k <= sqrt(n.toDouble())
 }
 
 /**
@@ -216,8 +216,8 @@ fun collatzSteps(x: Int): Int {
     var s = 0
     var n = x
     while (n != 1) {
-        if (n % 2 == 0) n = (n / 2) else
-            n = (3 * n + 1)
+        n = if (n % 2 == 0) (n / 2) else
+            (3 * n + 1)
         s = (s + 1)
     }
     return (s)
@@ -232,14 +232,14 @@ fun collatzSteps(x: Int): Int {
  */
 fun sin(x: Double, eps: Double): Double {
     var s = 1
-    var st = 3
-    var m = (pow(x, s) / factorial(s))
+    var st = -1
+    var m = (x % (2 * PI))
     var sum = m
     while (abs(m) >= abs(eps)) {
         s = (s + 2)
-        m = (pow(x, s) / factorial(s))
-        sum = (sum + pow(-1, (st)) * m)
-        st = (st + 1)
+        m = m * x * x / (s * (s - 1))
+        sum = (sum + st * m)
+        st = -st
     }
     return (sum)
 }
@@ -255,12 +255,12 @@ fun cos(x: Double, eps: Double): Double {
     var s = 2
     var m = 1.0
     var sum = m
-    var st = 1
+    var st = -1
     while (abs(m) >= abs(eps)) {
-        m = (pow((x % (2 * PI)), s) / factorial(s))
-        sum = (sum + pow(-1, st) * m)
-        st = (st + 1)
-        s = (s + 2)
+        m *= x * x / (s * (s - 1))
+        sum += (st * m)
+        st = -st
+        s += 2
     }
     return (sum)
 }
@@ -314,7 +314,6 @@ fun isPalindrome(n: Int): Boolean = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean = TODO()
-
 
 fun kc(x: Int): Int {
     var y = 0

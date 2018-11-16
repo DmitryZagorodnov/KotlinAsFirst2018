@@ -4,9 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
-import lesson3.task1.isPrime
-import lesson3.task1.kc
-import lesson3.task1.pow
+import java.lang.Math.pow
 import kotlin.math.sqrt
 
 /**
@@ -133,8 +131,8 @@ fun abs(v: List<Double>): Double {
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    if (list.size == 0) return (0.0)
-    else return ((list.sum() / list.size).toDouble())
+    return if (list.isEmpty()) (0.0)
+    else ((list.sum() / list.size))
 }
 
 /**
@@ -238,8 +236,7 @@ fun factorize(n: Int): List<Int> {
  */
 fun factorizeToString(n: Int): String {
     val list = factorize(n)
-    val s = list.joinToString(separator = "*")
-    return s
+    return list.joinToString(separator = "*")
 }
 
 /**
@@ -253,18 +250,26 @@ fun convert(n: Int, base: Int): List<Int> {
     var i = 0
     var m = n
     val list = mutableListOf<Int>()
-    while (n > pow(base, i)) {
+    while (n > pow(base.toDouble(), i.toDouble())) {
         i = (i + 1)
     }
     if (m < base) list.add(m)
     else while (i > 0) {
         i = (i - 1)
-        list.add(m / pow(base, i))
-        m = (m % pow(base, i))
+        list.add(m / pow(base.toDouble(), i.toDouble()).toInt())
+        m = (m % pow(base.toDouble(), i.toDouble()).toInt())
     }
     return (list)
 }
 
+fun alphabet(base: Int): List<Char> {
+    val baseAlphabet = mutableListOf<Char>()
+    for (i in 0 until base) {
+        if (i <= 9) baseAlphabet.add('0' + i)
+        else baseAlphabet.add('a' + i - 10)
+    }
+    return baseAlphabet
+}
 /**
  * Сложная
  *
@@ -273,7 +278,15 @@ fun convert(n: Int, base: Int): List<Int> {
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val s = convert(n, base)
+    val a = alphabet(base)
+    var ans = buildString {  }
+    for (i in s) {
+        ans += a[i]
+    }
+    return ans
+}
 
 /**
  * Средняя
@@ -286,7 +299,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var sum = 0
     var n = (digits.size - 1)
     for (i in 0..(digits.size - 1)) {
-        sum = (sum + digits[i] * pow(base, n))
+        sum = (sum + digits[i] * pow(base.toDouble(), n.toDouble()).toInt())
         n = (n - 1)
     }
     return (sum)
