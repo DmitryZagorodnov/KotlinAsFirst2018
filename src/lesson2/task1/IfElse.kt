@@ -109,11 +109,10 @@ fun timeForHalfWay(t1: Double, v1: Double,
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
                        rookX2: Int, rookY2: Int): Int {
-    return when {
-        kingX == rookX1 || kingY == rookY1 -> 1
-        kingX == rookX2 || kingY == rookY2 -> 2
-        else -> 0
-    }
+    var sum = 0
+    if (kingX == rookX1 || kingY == rookY1)  sum++
+    if (kingX == rookX2 || kingY == rookY2) sum += 2
+    return sum
 }
 
 
@@ -154,7 +153,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     kvmax = sqr(max)
     sumkv = sqr(sr) + sqr(min)
     return when {
-        max > a + b || max > b + c || max > a + c -> -1
+        max > sr + min -> -1
         kvmax > sumkv -> 2
         kvmax == sumkv -> 1
         else -> 0
@@ -169,15 +168,4 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    val max = maxOf(b, d)
-    val min = minOf(a, c)
-    val dl = max - min
-    val m = b - a
-    val n = d - c
-    return when {
-        dl - m - n > 0 -> -1
-        dl - m - n == 0 -> 0
-        else -> abs(dl - m - n)
-    }
-}
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = maxOf(-1, (minOf(b, d) - maxOf(a, c) ))

@@ -71,15 +71,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int {
-    var s = 0
-    var m: Int
-    do {
-        s = (s + 1)
-        m = (n % 10)
-    } while (m != 0)
-    return (s)
-}
+fun digitNumber(n: Int): Int = kc(n)
 
 /**
  * Простая
@@ -196,11 +188,12 @@ fun pow(x: Double, y: Int): Double {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    var k = 1
+    var k = 0
     while (k < sqrt(m.toDouble())) {
         k++
     }
-    if (k <= sqrt(n.toDouble())) return (true) else return (false)
+    if (k <= sqrt(n.toDouble())) return true
+    else return false
 }
 
 /**
@@ -240,8 +233,8 @@ fun collatzSteps(x: Int): Int {
 fun sin(x: Double, eps: Double): Double {
     var s = 1
     var st = 3
-    var m = (x % (2 * PI))
-    var sum = (m % (2 * PI))
+    var m = (pow(x, s) / factorial(s))
+    var sum = m
     while (abs(m) >= abs(eps)) {
         s = (s + 2)
         m = (pow(x, s) / factorial(s))
