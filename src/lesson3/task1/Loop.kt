@@ -274,22 +274,12 @@ fun cos(x: Double, eps: Double): Double {
  */
 fun revert(n: Int): Int {
     var s = n
-    var c = 0
     var rev = 0
-    var st = 1
-    if (kc(s) == 1) return (s)
-    else while (s != 0) {
-        c = (c + 1)
-        s = (s % 10)
-    }
-    for (i in 1..c) {
-        st = (st * 10)
-    }
-
-    s = n
-    for (i in 1..c) {
+    var st = pow(10.0, (kc(n) - 1).toDouble()).toInt()
+    for (i in 1..kc(n)) {
         rev += ((s % 10) * st)
         st = (st / 10)
+        s /= 10
     }
     return (rev)
 }
@@ -303,7 +293,7 @@ fun revert(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean = n == revert(n)
 
 /**
  * Средняя
