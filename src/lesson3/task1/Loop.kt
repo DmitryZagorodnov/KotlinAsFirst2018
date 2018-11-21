@@ -72,7 +72,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = kc(n)
+fun digitNumber(n: Int): Int {
+    var y = 0
+    var z = n
+    if (z == 0) return 1 else
+    while (z > 0) {
+        z /= 10
+        y++
+    }
+    return (y)
+}
 
 /**
  * Простая
@@ -84,13 +93,12 @@ fun fib(n: Int): Int {
     var s: Int
     var a = 1
     var b = 1
-    if ((n == 1) || (n == 2)) return (1) else
-        for (m in 3..n) {
-            s = a
-            a = b
-            b = (a + s)
+    for (m in 3..n) {
+        s = a
+        a = b
+        b = a + s
         }
-    return (b)
+    return b
 }
 
 /**
@@ -99,7 +107,7 @@ fun fib(n: Int): Int {
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = (m * n) / nod(m, n)
+fun lcm(m: Int, n: Int): Int = m / nod(m, n) * n
 
 fun nod(m: Int, n: Int): Int {
     var a = m
@@ -139,46 +147,6 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean = (nod(m, n) == 1)
-
-/*fun pow(x: Double, y: Double): Double {
-    var s = x
-    if (y == 0.0) return 1.0 else
-        if (y == 1.0) return (x) else
-            for (i in 2..y.toInt()) {
-                s = (s * x)
-            }
-    return (s)
-}
-
-*//*fun pow(x: Int, y: Int): Int {
-    var s = x
-    if (y == 0) return 1 else
-        if (y == 1) return (x) else
-            for (i in 2..y) {
-                s = (s * x)
-            }
-    return (s)
-}*//*
-
-fun pow(x: Int, y: Double): Int {
-    var s = x
-    if (y == 0.0) return 1 else
-        if (y.toInt() == 1) return (x) else
-            for (i in 2..y.toInt()) {
-                s = (s * x)
-            }
-    return (s)
-}
-
-fun pow(x: Double, y: Int): Double {
-    var s = x
-    if (y == 0) return 1.0 else
-        if (y == 1) return (x) else
-            for (i in 2..y) {
-                s = (s * x)
-            }
-    return (s)
-}*/
 
 
 /**
@@ -275,8 +243,8 @@ fun cos(x: Double, eps: Double): Double {
 fun revert(n: Int): Int {
     var s = n
     var rev = 0
-    var st = pow(10.0, (kc(n) - 1).toDouble()).toInt()
-    for (i in 1..kc(n)) {
+    var st = pow(10.0, (digitNumber(n) - 1).toDouble()).toInt()
+    for (i in 1..digitNumber(n)) {
         rev += ((s % 10) * st)
         st = (st / 10)
         s /= 10
@@ -305,6 +273,7 @@ fun isPalindrome(n: Int): Boolean = n == revert(n)
  */
 fun hasDifferentDigits(n: Int): Boolean = TODO()
 
+/*
 fun kc(x: Int): Int {
     var y = 0
     var z = x
@@ -314,6 +283,7 @@ fun kc(x: Int): Int {
     }
     return (y)
 }
+*/
 
 /**
  * Сложная
@@ -332,7 +302,7 @@ fun squareSequenceDigit(n: Int): Int {
     while (cifr < n) {
         i = (i + 1)
         kv = sqr(i)
-        cifr = (cifr + kc(kv))
+        cifr = (cifr + digitNumber(kv))
     }
     kv = sqr(i)
     while (n < cifr) {
@@ -360,7 +330,7 @@ fun fibSequenceDigit(n: Int): Int {
     while (cifr < n) {
         i = (i + 1)
         fb = fib(i)
-        cifr = (cifr + kc(fb))
+        cifr = (cifr + digitNumber(fb))
     }
     fb = fib(i)
     while (n < cifr) {
