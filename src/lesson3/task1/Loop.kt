@@ -76,11 +76,11 @@ fun digitNumber(n: Int): Int {
     var y = 0
     var z = n
     if (z == 0) return 1 else
-    while (z != 0) {
-        z /= 10
-        y++
-    }
-    return (y)
+        while (z != 0) {
+            z /= 10
+            y++
+        }
+    return y
 }
 
 /**
@@ -97,7 +97,7 @@ fun fib(n: Int): Int {
         s = a
         a = b
         b = a + s
-        }
+    }
     return b
 }
 
@@ -113,10 +113,10 @@ fun nod(m: Int, n: Int): Int {
     var a = m
     var b = n
     while ((a != 0) && (b != 0)) {
-        if (a > b) a = (a % b)
-        else b = (b % a)
+        if (a > b) a %= b
+        else b %= a
     }
-    return (a + b)
+    return a + b
 }
 
 /**
@@ -127,9 +127,9 @@ fun nod(m: Int, n: Int): Int {
 fun minDivisor(n: Int): Int {
     var s = 2
     while ((n % s) != 0) {
-        s = (s + 1)
+        s++
     }
-    return (s)
+    return s
 }
 
 /**
@@ -146,7 +146,7 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = (nod(m, n) == 1)
+fun isCoPrime(m: Int, n: Int): Boolean = nod(m, n) == 1
 
 
 /**
@@ -184,9 +184,11 @@ fun collatzSteps(x: Int): Int {
     var s = 0
     var n = x
     while (n != 1) {
-        n = if (n % 2 == 0) (n / 2) else
-            (3 * n + 1)
-        s = (s + 1)
+        n = if (n % 2 == 0)
+            n / 2
+        else
+            3 * n + 1
+        s++
     }
     return (s)
 }
@@ -204,12 +206,12 @@ fun sin(x: Double, eps: Double): Double {
     var m = (x % (2 * PI))
     var sum = m
     while (abs(m) >= abs(eps)) {
-        s = (s + 2)
-        m = m * x * x / (s * (s - 1))
-        sum = (sum + st * m)
+        s += 2
+        m = (m / s / (s - 1)) * (pow(x, 2.0) / s / (s - 1))
+        sum += st * m
         st = -st
     }
-    return (sum)
+    return sum
 }
 
 /**
@@ -220,17 +222,17 @@ fun sin(x: Double, eps: Double): Double {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun cos(x: Double, eps: Double): Double {
-    var s = 2
     var m = 1.0
     var sum = m
-    var st = -1
+    var st = 1
+    var s = 2
     while (abs(m) >= abs(eps)) {
-        m *= x * x / (s * (s - 1))
-        sum += (st * m)
         st = -st
+        m = (m / s / (s - 1)) * (pow(x, 2.0) / s / (s - 1))
+        sum += m
         s += 2
     }
-    return (sum)
+    return sum
 }
 
 /**
@@ -241,15 +243,14 @@ fun cos(x: Double, eps: Double): Double {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun revert(n: Int): Int {
-    var s = n
-    var rev = 0
-    var st = pow(10.0, (digitNumber(n) - 1).toDouble()).toInt()
-    for (i in 1..digitNumber(n)) {
-        rev += ((s % 10) * st)
-        st = (st / 10)
-        s /= 10
+    var old = n
+    var new = 0
+    while (old != 0) {
+        val cifra = old % 10
+        new = new * 10 + cifra
+        old /= 10
     }
-    return (rev)
+    return new
 }
 
 /**
@@ -300,17 +301,17 @@ fun squareSequenceDigit(n: Int): Int {
     var i = 0
     val nc: Int
     while (cifr < n) {
-        i = (i + 1)
+        i++
         kv = sqr(i)
-        cifr = (cifr + digitNumber(kv))
+        cifr += digitNumber(kv)
     }
     kv = sqr(i)
     while (n < cifr) {
-        kv = (kv / 10)
-        cifr = (cifr - 1)
+        kv /= 10
+        cifr--
     }
-    nc = (kv % 10)
-    return (nc)
+    nc = kv % 10
+    return nc
 }
 
 /**
@@ -328,15 +329,15 @@ fun fibSequenceDigit(n: Int): Int {
     var i = 0
     val nc: Int
     while (cifr < n) {
-        i = (i + 1)
+        i++
         fb = fib(i)
-        cifr = (cifr + digitNumber(fb))
+        cifr += digitNumber(fb)
     }
     fb = fib(i)
     while (n < cifr) {
-        fb = (fb / 10)
-        cifr = (cifr - 1)
+        fb /= 10
+        cifr--
     }
-    nc = (fb % 10)
-    return (nc)
+    nc = fb % 10
+    return nc
 }
