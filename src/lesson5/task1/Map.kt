@@ -118,7 +118,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = (b + a) == b
 
 /**
  * Средняя
@@ -196,7 +196,15 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit = TO
  *
  * Для двух списков людей найти людей, встречающихся в обоих списках
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String>  {
+    val list = mutableListOf<String>()
+    for (i in 0..(a.size - 1)) {
+        for (j in 0..(b.size - 1)) {
+            if (a[i] == b[j]) list.add(a[i])
+        }
+    }
+    return list
+}
 
 /**
  * Средняя

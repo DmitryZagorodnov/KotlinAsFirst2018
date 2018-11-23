@@ -120,9 +120,9 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
 fun abs(v: List<Double>): Double {
     var s = 0.0
     for (element in v) {
-        s = (s + sqr(element))
+        s += sqr(element)
     }
-    return (sqrt(s))
+    return sqrt(s)
 }
 
 /**
@@ -131,8 +131,8 @@ fun abs(v: List<Double>): Double {
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    return if (list.isEmpty()) (0.0)
-    else ((list.sum() / list.size))
+    return if (list.isEmpty()) 0.0
+    else list.sum() / list.size
 }
 
 /**
@@ -146,9 +146,9 @@ fun mean(list: List<Double>): Double {
 fun center(list: MutableList<Double>): MutableList<Double> {
     val sr = mean(list)
     for (i in 0..(list.size - 1)) {
-        list[i] = (list[i] - sr)
+        list[i] -= sr
     }
-    return (list)
+    return list
 }
 
 /**
@@ -161,9 +161,9 @@ fun center(list: MutableList<Double>): MutableList<Double> {
 fun times(a: List<Double>, b: List<Double>): Double {
     var c = 0.0
     for (i in 0..(a.size - 1)) {
-        c = (c + a[i] * b[i])
+        c += a[i] * b[i]
     }
-    return (c)
+    return c
 }
 
 /**
@@ -177,10 +177,10 @@ fun times(a: List<Double>, b: List<Double>): Double {
 fun polynom(p: List<Double>, x: Double): Double {
     var px = 0.0
     var pr = 1.0
-    if (p.isEmpty()) return (0.0)
+    if (p.isEmpty()) return 0.0
     else for (i in 0..(p.size - 1)) {
-        px = (px + p[i] * pr)
-        pr = (pr * x)
+        px += p[i] * pr
+        pr *= x
     }
     return (px)
 }
@@ -198,13 +198,11 @@ fun polynom(p: List<Double>, x: Double): Double {
  */
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
     var sum = 0.0
-    var l: Double
     for (i in 0..(list.size - 1)) {
-        l = list[i]
-        list[i] = (list[i] + sum)
-        sum = (sum + l)
+        list[i] += sum
+        sum++
     }
-    return (list)
+    return list
 }
 
 /**
@@ -219,9 +217,9 @@ fun factorize(n: Int): List<Int> {
     var d = n
     val list = mutableListOf<Int>()
     while (d > 1) {
-        if ((d % s) == 0) {
+        if (d % s == 0) {
             list.add(s)
-            d = (d / s)
+            d /= s
         } else s++
     }
     return list
@@ -251,15 +249,15 @@ fun convert(n: Int, base: Int): List<Int> {
     var m = n
     val list = mutableListOf<Int>()
     while (n > pow(base.toDouble(), i.toDouble())) {
-        i = (i + 1)
+        i++
     }
     if (m < base) list.add(m)
     else while (i > 0) {
-        i = (i - 1)
+        i--
         list.add(m / pow(base.toDouble(), i.toDouble()).toInt())
         m = (m % pow(base.toDouble(), i.toDouble()).toInt())
     }
-    return (list)
+    return list
 }
 
 fun alphabet(base: Int): List<Char> {
@@ -299,10 +297,10 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var sum = 0
     var n = (digits.size - 1)
     for (i in 0..(digits.size - 1)) {
-        sum = (sum + digits[i] * pow(base.toDouble(), n.toDouble()).toInt())
-        n = (n - 1)
+        sum += digits[i] * pow(base.toDouble(), n.toDouble()).toInt()
+        n--
     }
-    return (sum)
+    return sum
 }
 
 /**
