@@ -150,7 +150,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *   ) -> "Мария"
  */
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    val tseni = mutableListOf<Double>()
+    val tseni = mutableListOf<Double>( )
     val names = mutableListOf<String>()
     for ((name, para) in stuff) {
         if (para.first == kind)  tseni.add(para.second); names.add(name)

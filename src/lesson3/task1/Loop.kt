@@ -203,11 +203,12 @@ fun collatzSteps(x: Int): Int {
 fun sin(x: Double, eps: Double): Double {
     var s = 1
     var st = -1
-    var m = (x % (2 * PI))
+    val xtochkaangle = x.angle()
+    var m = xtochkaangle
     var sum = m
     while (abs(m) >= abs(eps)) {
         s += 2
-        m = m * pow(x, 2.0) / s / (s - 1)
+        m = m * pow(xtochkaangle, 2.0) / (s * (s - 1))
         sum += st * m
         st = -st
     }
@@ -227,7 +228,7 @@ fun cos(x: Double, eps: Double): Double {
     var sum = m
     var st = 1
     var s = 2
-    val p = pow((x % (2 * PI)), 2.0)
+    val p = pow(x.angle(), 2.0)
     while (abs(m) >= abs(eps)) {
         st = -st
         m = m * p / s / (s - 1)
