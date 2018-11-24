@@ -181,17 +181,17 @@ class Tests {
     @Test
     @Tag("Normal")
     fun findCheapestStuff() {
+        assertEquals(
+            "Мария",
+            findCheapestStuff(
+                    mapOf("Мария" to ("печенье" to 20.0), "Орео" to ("печенье" to 100.0)),
+                    "печенье"
+            )
+        )
         assertNull(
                 findCheapestStuff(
                         mapOf("Мария" to ("печенье" to 20.0), "Орео" to ("печенье" to 100.0)),
                         "торт"
-                )
-        )
-        assertEquals(
-                "Мария",
-                findCheapestStuff(
-                        mapOf("Мария" to ("печенье" to 20.0), "Орео" to ("печенье" to 100.0)),
-                        "печенье"
                 )
         )
     }

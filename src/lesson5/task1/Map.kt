@@ -3,6 +3,7 @@
 package lesson5.task1
 
 import lesson3.task1.digitNumber
+import java.util.function.BinaryOperator.minBy
 
 /**
  * Пример
@@ -150,13 +151,12 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *   ) -> "Мария"
  */
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    val tseni = mutableListOf<Double>( )
-    val names = mutableListOf<String>()
+    val map = mutableMapOf<String, Double>()
     for ((name, para) in stuff) {
-        if (para.first == kind)  tseni.add(para.second); names.add(name)
+        if (para.first == kind)  map[name] = para.second
     }
-    return if (tseni.isNotEmpty()) names[tseni.indexOf(tseni.min())]
-    else null
+    val min = map.minBy { it.value }
+    return min?.key
 }
 
 /**
@@ -206,14 +206,7 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit = TO
  *
  * Для двух списков людей найти людей, встречающихся в обоих списках
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String>  {
-    val list = mutableListOf<String>()
-    for (i in 0..(a.size - 1)) {
-        if (b.indexOf(a[i]) != -1) list.add(a[i])
-        }
-    return list
-}
-
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String>  = a.intersect(b).toList()
 /**
  * Средняя
  *
@@ -226,7 +219,7 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String>  {
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     var s = 0
     for (char in word) {
-        if (char in chars) s++
+        if (char.toLowerCase() in chars.map { it.toLowerCase() }) s++
     }
     return s == word.length
 }
