@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import lesson3.task1.digitNumber
+
 /**
  * Пример
  *
@@ -147,7 +149,15 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    val tseni = mutableListOf<Double>()
+    val names = mutableListOf<String>()
+    for ((name, para) in stuff) {
+        if (para.first == kind)  tseni.add(para.second); names.add(name)
+    }
+    return if (tseni.isNotEmpty()) names[tseni.indexOf(tseni.min())]
+    else null
+}
 
 /**
  * Сложная
@@ -199,10 +209,8 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit = TO
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String>  {
     val list = mutableListOf<String>()
     for (i in 0..(a.size - 1)) {
-        for (j in 0..(b.size - 1)) {
-            if (a[i] == b[j]) list.add(a[i])
+        if (b.indexOf(a[i]) != -1) list.add(a[i])
         }
-    }
     return list
 }
 
@@ -215,7 +223,13 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String>  {
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
+fun canBuildFrom(chars: List<Char>, word: String): Boolean {
+    var s = 0
+    for (char in word) {
+        if (char in chars) s++
+    }
+    return s == word.length
+}
 
 /**
  * Средняя

@@ -207,13 +207,14 @@ fun sin(x: Double, eps: Double): Double {
     var sum = m
     while (abs(m) >= abs(eps)) {
         s += 2
-        m = (m / s / (s - 1)) * (pow(x, 2.0) / s / (s - 1))
+        m = m * pow(x, 2.0) / s / (s - 1)
         sum += st * m
         st = -st
     }
     return sum
 }
 
+fun Double.angle(): Double = this % (2 * PI)
 /**
  * Средняя
  *
@@ -226,10 +227,11 @@ fun cos(x: Double, eps: Double): Double {
     var sum = m
     var st = 1
     var s = 2
+    val p = pow((x % (2 * PI)), 2.0)
     while (abs(m) >= abs(eps)) {
         st = -st
-        m = (m / s / (s - 1)) * (pow(x, 2.0) / s / (s - 1))
-        sum += m
+        m = m * p / s / (s - 1)
+        sum += st * m
         s += 2
     }
     return sum
