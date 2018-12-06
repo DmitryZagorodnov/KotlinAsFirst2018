@@ -118,12 +118,7 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO() /*{
-    var sedarg = mutableMapOf<Int, List<String>>()
-    for ((name, grade) in grades) {
-        sedarg[grade] = listOf(sedarg[grade]!!.plus(name))
-    }
-}*/
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
 
 /**
  * Простая
@@ -164,19 +159,10 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
-/*for ((name, para) in stuff) {
-     val s =    minBy.{val map = stuff.filter { para.first == kind }.forEach {  } }
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    val s = stuff.filterValues { it.first == kind }
+    return s.minBy { it.value.second }?.key
 }
-}*/
-/*{
-    val map = mutableMapOf<String, Double>()
-    for ((name, para) in stuff) {
-        if (para.first == kind) map[name] = para.second
-    }
-    val min = map.minBy { it.value }
-    return min?.key
-}*/
 
 /**
  * Сложная
@@ -240,7 +226,7 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.intersect(b
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = word.toSet().all { it in chars }
+fun canBuildFrom(chars: List<Char>, word: String): Boolean = word.toSet().all { (it.toLowerCase() in chars || it.toUpperCase() in chars) }
 
 
 /**
@@ -255,7 +241,13 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = word.toSet().all { 
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val map = mutableMapOf<String, Int>()
+    for (element in list)
+        map[element] = map.getOrPut(element) { 0 } + 1
+    return map.filterValues { it != 1 }
+}
+
 
 /**
  * Средняя

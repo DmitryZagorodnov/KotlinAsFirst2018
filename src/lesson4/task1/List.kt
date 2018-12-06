@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
+import lesson3.task1.digitNumber
 import java.lang.Math.pow
 import kotlin.math.sqrt
 
@@ -175,9 +176,9 @@ fun polynom(p: List<Double>, x: Double): Double = p.fold(0.0) {pe, el -> pe + el
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
-        for (i in 1..(list.size - 1)) {
-            list[i] += list[i - 1]
-        }
+    for (i in 1..(list.size - 1)) {
+    list[i] += list[i - 1]
+    }
     return list
 }
 
@@ -218,19 +219,13 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> {
-    var i = 0
-    var m = n
+    var m = n * base
     val list = mutableListOf<Int>()
-    while (n > pow(base.toDouble(), i.toDouble())) {
-        i++
+    while ((m / base) > 0) {
+        m /= base
+        list.add(m % base)
     }
-    if (m < base) list.add(m)
-    else while (i > 0) {
-        i--
-        list.add(m / pow(base.toDouble(), i.toDouble()).toInt())
-        m = (m % pow(base.toDouble(), i.toDouble()).toInt())
-    }
-    return list
+    return list.reversed()
 }
 
 fun alphabet(base: Int): List<Char> {
@@ -286,7 +281,18 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val a = alphabet(base)
+    var s = str.length
+    var sum = 0
+    while (s != 0) {
+        for (element in str) {
+        s--
+        sum += a.indexOf(element) * pow(base.toDouble(), s.toDouble()).toInt()
+        }
+    }
+    return sum
+}
 
 /**
  * Сложная
