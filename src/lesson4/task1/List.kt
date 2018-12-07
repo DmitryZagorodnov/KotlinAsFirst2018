@@ -118,8 +118,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = sqrt(v.fold(0.0) {pR, el -> pR + el * el})
-
+fun abs(v: List<Double>): Double = sqrt(v.sumByDouble { it * it })
 /**
  * Простая
  *
@@ -153,7 +152,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.0.
  */
-fun times(a: List<Double>, b: List<Double>): Double = a.fold(0.0) {pr, el -> pr + el * b[a.indexOf(el)]}
+fun times(a: List<Double>, b: List<Double>): Double = a.mapIndexed {ind, el -> el * b[ind]}.sum()
 /**
  * Средняя
  *
@@ -162,7 +161,7 @@ fun times(a: List<Double>, b: List<Double>): Double = a.fold(0.0) {pr, el -> pr 
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0.0 при любом x.
  */
-fun polynom(p: List<Double>, x: Double): Double = p.fold(0.0) {pe, el -> pe + el * pow(x, p.indexOf(el).toDouble())}
+fun polynom(p: List<Double>, x: Double): Double = p.mapIndexed {ind, el -> el * pow(x, ind.toDouble())}.sum()
 
 
 /**

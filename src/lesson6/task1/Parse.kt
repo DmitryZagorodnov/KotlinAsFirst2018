@@ -73,6 +73,7 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String = TODO()
 
+
 /**
  * Средняя
  *
@@ -85,6 +86,23 @@ fun dateStrToDigit(str: String): String = TODO()
  */
 fun dateDigitToStr(digital: String): String = TODO()
 
+fun NiM(n: String): String? {
+    return when (n) {
+        "01" -> "января"
+        "02" -> "февраля"
+        "03" -> "марта"
+        "04" -> "апреля"
+        "05" -> "мая"
+        "06" -> "июня"
+        "07" -> "июля"
+        "08" -> "августа"
+        "09" -> "сентября"
+        "10" -> "октября"
+        "11" -> "ноября"
+        "12" -> "декабря"
+        else -> null
+    }
+}
 /**
  * Средняя
  *
