@@ -283,8 +283,8 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     if (list.isNotEmpty() && number < (list.max()!! * 2)) {
     for (i in 0..(list.size - 1)) {
         if ((number - list[i]) in set)
-            a = if (i >= list.indexOf(number - list[i])) Pair(list.indexOf(number - list[i]), i)
-            else Pair(i, list.indexOf(number - list[i]))
+        a = if (i >= list.indexOf(number - list[i])) Pair(list.indexOf(number - list[i]), i)
+        else Pair(i, list.indexOf(number - list[i]))
         }
     }
     return a
