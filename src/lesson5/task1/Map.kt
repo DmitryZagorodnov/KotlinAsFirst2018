@@ -280,6 +280,7 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     val set = list.toSet()
     var a = Pair(-1, -1)
+    if (number == 0) return a
     if (list.isNotEmpty() && number < (list.max()!! * 2)) {
     for (i in 0..(list.size - 1)) {
         if ((number - list[i]) in set)
