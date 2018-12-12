@@ -220,13 +220,13 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> {
-    var m = n * base
+    var m = n
     val list = mutableListOf<Int>()
-    if (n == 0) list.add(0)
-    while ((m / base) > 0) {
-        m /= base
+    while (m >= base) {
         list.add(m % base)
+        m /= base
     }
+    list.add(m)
     return list.reversed()
 }
 
@@ -247,15 +247,8 @@ fun alphabet(base: Int): List<Char> {
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String {
-    val s = convert(n, base)
-    val a = alphabet(base)
-    var ans = ""
-    for (i in s) {
-        ans += a[i]
-    }
-    return ans
-}
+fun convertToString(n: Int, base: Int): String = convert(n, base).joinToString(separator = "")
+{if (it >= 10) "${'a' + it - 10}" else "$it"}
 
 /**
  * Средняя
@@ -284,6 +277,14 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Например: str = "13c", base = 14 -> 250
  */
 fun decimalFromString(str: String, base: Int): Int {
+    var list = mutableListOf<Int>()
+    val a = alphabet(base)
+    for (element in str) {
+        if (element.toInt() in 0..9) list.add(element.toInt())
+        else list.add(a.indexOf(element))
+    }
+    return decimal(list, base)
+} /*{
     val a = alphabet(base)
     var s = str.length
     var sum = 0
@@ -294,7 +295,7 @@ fun decimalFromString(str: String, base: Int): Int {
         }
     }
     return sum
-}
+}*/
 
 /**
  * Сложная
