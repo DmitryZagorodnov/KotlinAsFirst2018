@@ -247,8 +247,7 @@ fun alphabet(base: Int): List<Char> {
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = convert(n, base).joinToString(separator = "")
-{if (it >= 10) "${'a' + it - 10}" else "$it"}
+fun convertToString(n: Int, base: Int): String = convert(n, base).joinToString(separator = "") {if (it >= 10) "${'a' + it - 10}" else "$it"}
 
 /**
  * Средняя
@@ -277,11 +276,11 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Например: str = "13c", base = 14 -> 250
  */
 fun decimalFromString(str: String, base: Int): Int {
-    var list = mutableListOf<Int>()
+    val list = listOf<Int>()
     val a = alphabet(base)
     for (element in str) {
-        if (element.toInt() in 0..9) list.add(element.toInt())
-        else list.add(a.indexOf(element))
+        if (element in '0'..'9') list + element.toInt()
+        else list + a.indexOf(element)
     }
     return decimal(list, base)
 } /*{
