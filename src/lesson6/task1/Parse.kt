@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import lesson2.task2.daysInMonth
+
 /**
  * Пример
  *
@@ -71,8 +73,21 @@ fun main(args: Array<String>) {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
-
+fun dateStrToDigit(str: String): String {
+    val s = str.split(" ")
+    if (s.size != 3) return ""
+    val string = ""
+    val day = s[0].toIntOrNull()
+    val month = stinnu(s[1])
+    val year = s[2].toIntOrNull()
+    if (day != null && year != null && month != null) {
+    return when {
+        (day in 1..(daysInMonth(month.toInt(), year))) -> "$string${twoDigitStr(day)}.$month.$year"
+        else -> ""
+    }
+}
+else return ""
+}
 
 /**
  * Средняя
@@ -86,15 +101,21 @@ fun dateStrToDigit(str: String): String = TODO()
  */
 fun dateDigitToStr(digital: String): String {
     val s = digital.split(".")
+    if (s.size != 3) return ""
     val string = ""
-    val day = s[0]
-    val month = NiM(s[1])
-    val year = s[2]
-    return if ((s[0].toInt() in 0..31) && ((s[0].toInt() <= 28) && (month == "февраля")) && NiM(s[1]) != null) "$string$day $month $year"
-    else ""
+    val day = s[0].toIntOrNull()
+    val month = nuinst(s[1])
+    val year = s[2].toIntOrNull()
+    if (day != null && year != null) {
+        return when {
+            (day in 1..(daysInMonth(s[1].toInt(), year))) && (month != null) -> "$string$day $month $year"
+            else -> ""
+        }
+    }
+    else return ""
 }
 
-fun NiM(n: String): String? {
+fun nuinst(n: String): String? {
     return when (n) {
         "01" -> "января"
         "02" -> "февраля"
@@ -111,6 +132,25 @@ fun NiM(n: String): String? {
         else -> null
     }
 }
+
+fun stinnu (n: String): String? {
+    return when (n) {
+        "января" -> "01"
+        "февраля" -> "02"
+        "марта" -> "03"
+        "апреля" -> "04"
+        "мая" -> "05"
+        "июня" -> "06"
+        "июля" -> "07"
+        "августа" -> "08"
+        "сентября" -> "09"
+        "октября" -> "10"
+        "ноября" -> "11"
+        "декабря" -> "12"
+        else -> null
+    }
+}
+
 
 /**
  * Средняя
