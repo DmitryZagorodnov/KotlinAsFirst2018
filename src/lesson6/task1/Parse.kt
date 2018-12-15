@@ -84,7 +84,15 @@ fun dateStrToDigit(str: String): String = TODO()
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO(         )
+fun dateDigitToStr(digital: String): String {
+    val s = digital.split(".")
+    val string = ""
+    val day = s[0]
+    val month = NiM(s[1])
+    val year = s[2]
+    return if ((s[0].toInt() in 0..31) && ((s[0].toInt() <= 28) && (month == "февраля")) && NiM(s[1]) != null) "$string$day $month $year"
+    else ""
+}
 
 fun NiM(n: String): String? {
     return when (n) {
@@ -103,6 +111,7 @@ fun NiM(n: String): String? {
         else -> null
     }
 }
+
 /**
  * Средняя
  *
