@@ -55,27 +55,26 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
-    var map = mutableMapOf<String, Int>()
+    val map = mutableMapOf<String, Int>()
     for (string in substrings) {
         if (!map.containsKey(string)) map[string] = 0
     }
     val f = File(inputName).readText().toLowerCase()
     for ((string, _) in map) {
-            map[string] = strinstr(f, string.toLowerCase())
+            map[string] = vhozhdeniivstroky(f, string.toLowerCase())
         }
     return map
 }
 
-fun strinstr(n: String, s: String): Int {
+fun vhozhdeniivstroky(n: String, s: String): Int {
     var x = 0
     var y = 0
-    val size = n.length
-    while(x < size) {
-        x = n.indexOf(s, x)
-        if (x != -1) {
-            x++
+    while (x < n.length) {
+        if (n.indexOf(s, x) != -1) {
+            x = n.indexOf(s, x) + 1
             y++
-        } else break
+        }
+        else break
     }
     return y
 }
