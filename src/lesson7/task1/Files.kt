@@ -59,15 +59,26 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     for (string in substrings) {
         if (!map.containsKey(string)) map[string] = 0
     }
+    val f = File(inputName).readText().toLowerCase()
     for ((string, _) in map) {
-        while (File(inputName).readText().toLowerCase().indexOf(string.toLowerCase()) != -1) {
-                    map[string] = map[string]!! + 1
-            }
+            map[string] = strinstr(f, string.toLowerCase())
         }
     return map
 }
 
-
+fun strinstr(n: String, s: String): Int {
+    var x = 0
+    var y = 0
+    val size = n.length
+    while(x < size) {
+        x = n.indexOf(s, x)
+        if (x != -1) {
+            x++
+            y++
+        } else break
+    }
+    return y
+}
 /**
  * Средняя
  *
