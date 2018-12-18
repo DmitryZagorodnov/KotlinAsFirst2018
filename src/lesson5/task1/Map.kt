@@ -193,15 +193,16 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
     val map = friends.toMutableMap()
     for (i in 1..3) {
         for ((name, set) in map) {
-            for (element in set) {
-                if (element in map && (friends[element] !== null)) map[name] = friends[element]!!.union(set) - name
-                else map[element] = mutableSetOf()
+            if (set.isNotEmpty()) {
+                for (element in set) {
+                    if (element in map && (friends[element] !== null)) map[name] = friends[element]!!.union(set) - name
+                    else map[element] = mutableSetOf()
+                }
             }
         }
     }
     return map
 }
-
 /**
  * Простая
  *
@@ -289,7 +290,16 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int>  {
+    val map = mutableMapOf<Int, Int>()
+    for ((i, element) in list.withIndex()) {
+        map[element] = i
+        if (map.contains(number - element) && map[element] != map[number - element])
+            return Pair(minOf(map[element]!!, map[number - element]!!), maxOf(map[element]!!, map[number - element]!!))
+    }
+    return Pair(-1, -1)
+}
+/*{
     val set = list.toSet()
     var a = Pair(-1, -1)
     if (list.isNotEmpty() && number < (list.max()!! * 2)) {
@@ -300,7 +310,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
         }
     }
     return a
-}
+}*/
 
 /**
  * Очень сложная
