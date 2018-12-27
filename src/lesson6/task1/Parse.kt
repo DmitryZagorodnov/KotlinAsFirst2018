@@ -77,12 +77,9 @@ fun dateStrToDigit(str: String): String {
     val s = str.split(" ")
     if (s.size != 3) return ""
     val string = ""
-    val day = s[0].toIntOrNull()
-    val month = stinnu(s[1])
-    val year = s[2].toIntOrNull()
-    if (day != null && year != null && month != null) {
+    if (s[0].toIntOrNull() != null && s[2].toIntOrNull() != null && monthInNumber(s[1]) != null) {
     return when {
-        (day in 1..(daysInMonth(month.toInt(), year))) -> "$string${twoDigitStr(day)}.$month.$year"
+        (s[0].toInt() in 1..(daysInMonth(monthInNumber(s[1])!!.toInt(), s[2].toInt()))) -> "$string${twoDigitStr(s[0].toInt())}.${monthInNumber(s[1])}.${s[2].toInt()}"
         else -> ""
     }
 }
@@ -103,19 +100,16 @@ fun dateDigitToStr(digital: String): String {
     val s = digital.split(".")
     if (s.size != 3) return ""
     val string = ""
-    val day = s[0].toIntOrNull()
-    val month = nuinst(s[1])
-    val year = s[2].toIntOrNull()
-    if (day != null && year != null) {
+    if (s[0].toIntOrNull() != null && s[2].toIntOrNull() != null) {
         return when {
-            (day in 1..(daysInMonth(s[1].toInt(), year))) && (month != null) -> "$string$day $month $year"
+            (s[0].toInt() in 1..(daysInMonth(s[1].toInt(), s[2].toInt()))) && (numberInMonth(s[1]) != null) -> "$string${s[0].toInt()} ${numberInMonth(s[1])} ${s[2].toInt()}"
             else -> ""
         }
     }
     else return ""
 }
 
-fun nuinst(n: String): String? {
+fun numberInMonth(n: String): String? {
     return when (n) {
         "01" -> "января"
         "02" -> "февраля"
@@ -133,7 +127,7 @@ fun nuinst(n: String): String? {
     }
 }
 
-fun stinnu (n: String): String? {
+fun monthInNumber(n: String): String? {
     return when (n) {
         "января" -> "01"
         "февраля" -> "02"

@@ -61,12 +61,12 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     }
     val f = File(inputName).readText().toLowerCase()
     for ((string, _) in map) {
-            map[string] = vhozhdeniivstroky(f, string.toLowerCase())
+            map[string] = stringsInString(f, string.toLowerCase())
         }
     return map
 }
 
-fun vhozhdeniivstroky(n: String, s: String): Int {
+fun stringsInString(n: String, s: String): Int {
     var x = 0
     var y = 0
     while (x < n.length) {
